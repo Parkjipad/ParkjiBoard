@@ -1,0 +1,9 @@
+<?session_start();?>
+<html>
+<body>
+	<?session_destroy();?>
+	<script>
+		history.back();	
+	</script>
+</body>
+</html>
