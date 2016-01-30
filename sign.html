@@ -1,0 +1,199 @@
+<?session_start();?>
+<html>
+<head>
+  <title>회원 가입</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/parkji-style.css" rel="stylesheet">
+  <meta charset="utf-8">
+</head>
+<style>
+#email, #emailCompany{
+  margin-top: 15px;
+  width: 200px;
+  height:40px;
+  font-size:14pt;
+}
+.btn{
+  margin-top: 15px;
+  width: 150px;
+  height: 40px;
+  font-size: 14px;
+  padding-top: 10px;
+}
+#firstPN{
+  margin-top: 15px;
+  width: 100px;
+  height:40px;
+  font-size:12pt;
+}
+#signText{
+  margin-top: 15px;
+  width: 430px;
+  height:40px;
+  font-size:12pt;
+}
+</style>
+
+<body>
+  
+  <div class="container">
+
+    <hr>
+
+    <div class="jumbotron">
+      <h1>회원가입</h1>
+      <p class="lead">Join us</p>
+    </div>
+
+    <hr>
+
+    <div class="row">
+
+      <form action="sign_up.php" method = "POST" name = "frm" class="form-horizontal">
+        
+        <div class="control-group">
+          <label class="control-label" for="Name"><h3 class="span2">이름 : </h3></label>
+          
+          <div class="control span6">
+            <input type = "text" id="signText" name = "Name"></input>
+          </div>
+
+        </div>
+
+        <div class="control-group">
+
+          <label class="control-label" for="Id"><h3 class="span2">아이디 : </h3></label>
+          
+          <div class="control span6">
+            <input type = "text" id="signText" name = "Id" class="Id" readonly></input>
+          </div>
+
+          <button class="btn span2" type="button" onClick="idCheck();">중복 검사</button>
+          
+        </div>
+
+        <div class="control-group">
+
+          <label class="control-label" for="Pass"><h3 class="span2">비밀번호 : </h3></label>
+          
+          <div class="control span6">
+            <input type = "password" id="signText" name = "Pass"></input>
+          </div>
+
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="mailName"><h3 class="span2">e메일 : </h3></label>
+          
+          <div class="control span3">
+            <input type = "text" id="email" name = "mailName"></input><h3>@</h3>
+          </div>
+
+         
+
+          <div class="control span3">
+            <input type = "text" id="emailCompany" name = "mailCompany"></input>
+          </div>
+
+          <div class="btn-group span1">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-target="#" aria-expanded="false">
+              Mail<span class="caret"></span></button>
+              <ul class="dropdown-menu control" role="menu" aria-labelledby="dropdownMenu" id="eee">
+                <li><a tabindex="-1" href="#">daum.net</a></li>
+                <li onClick="insertMail(this);"><a tabindex="-1" href="#">gmail.com</a></li>
+                <li onClick="insertMail(this);"><a tabindex="-1" href="#">hanmail.net</a></li>
+                <li onClick="insertMail(this);"><a tabindex="-1" href="#">nate.com</a></li>
+                <li onClick="insertMail(this);"><a tabindex="-1" href="#">naver.com</a></li>
+                <li class="divider"></li>
+                <li onClick="insertMail(this);"><a tabindex="-1" href="#">직접입력</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" ><h3 class="span2">전화번호 : </h3></label>
+            <div class="btn-group control span1">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-target="#" aria-expanded="false" style="width:80px;">
+                010<span class="caret"></span></button>
+                <ul class="dropdown-menu control span1" role="menu" aria-labelledby="dropdownMenu" id="rrr">
+                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">010</a></li>
+                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">011</a></li>
+                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">016</a></li>
+                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">017</a></li>
+                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">018</a></li>
+                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">019</a></li>
+                </ul>
+              </div>
+
+              <div class="control" style="margin-left:50px;">
+                <input type="hidden" id="firstPN" name="firstPN"></input>
+              </div>
+
+              <div class="control" style="margin-left:50px;">
+                <h3 class="span1" style="text-align:center;">-</h3>
+              </div>
+
+              <div class="control span2">
+                <input type="text" id="firstPN" name="middlePN"></input>
+              </div>
+
+              <div class="control" style="margin-left:50px;">
+                <h3 class="span1">-</h3>
+              </div>
+
+              <div class="control span2">
+                <input type="text" id="firstPN" name="lastPN"></input>
+              </div>
+            </div>
+
+            <div class="control-group">
+
+              <div class="control span2 offset2" style="margin-left:230px;">
+                <button type="submit" class="btn btn-primary control">가입</button>
+              </div>
+
+              <div class="control span2 offset1">
+                <button type="reset" class="btn btn-info control">다시적기</button>
+              </div>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+      <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+      <script>
+      var openwin;
+
+      function aa(){
+         $('html, body').scrollTop(300);
+      }
+
+      function insertMail(e){
+        $('#emailCompany').attr('value',$(e).text());
+        if($(e).text()=="직접입력")
+          $('#emailCompany').attr('value',"");
+      }
+
+      function insertTel(r){
+        $('#firstPN').attr('value',$(r).text());
+      }
+      function idCheck(){
+        openwin = window.open("id_Check.php","","width=400, height=300");
+      } 
+
+      function insertId(){
+        var i = openwin.hidden.temp_return.value;
+        $('.Id').attr('value',i);
+      }
+      </script>
+
+    </body>
+    </html>
