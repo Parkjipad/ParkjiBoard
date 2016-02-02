@@ -30,3 +30,21 @@ body {
 	font-size: 21px;
 	padding: 14px 24px;
 }
+#firstPN{
+  margin-top: 15px;
+  width: 100px;
+  height:40px;
+  font-size:12pt;
+}
+#signText{
+  margin-top: 15px;
+  width: 430px;
+  height:40px;
+  font-size:12pt;
+}
+#email, #emailCompany{
+  margin-top: 15px;
+  width: 200px;
+  height:40px;
+  font-size:14pt;
+}

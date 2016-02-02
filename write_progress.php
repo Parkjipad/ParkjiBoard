@@ -12,10 +12,10 @@
 		print_r($_FILES);
 		echo "<BR>";
 
-		$date_now=date(y.m.d);
+		$date_now=date(y."-".m."-".d);
 		$look = 0;
-		$file_path = "c:/APM_Setup/htdocs/board1/upload/".$_SESSION["user"]["Id"]."/".$_FILES["file_up"]["name"];
-		$dir = "c:/APM_Setup/htdocs/board1/upload/".$_SESSION["user"]["Id"];
+		$file_path = "upload/".$_SESSION["user"]["Id"]."/".$_FILES["file_up"]["name"];
+		$dir = "upload/".$_SESSION["user"]["Id"];
 		$Name = $_SESSION["user"]["Name"];
 		$Id = $_SESSION["user"]["Id"];
 		$filename=$_FILES["file_up"]["name"];
@@ -31,6 +31,6 @@
 			mkdir($dir,0777,true);
 		}
 		move_uploaded_file($_FILES["file_up"]["tmp_name"],$file_path);
-		echo "<script>window.open('board.php','_self');</script>"
+		echo "<script>window.open('main.php','_self');</script>"
 	?>
 
