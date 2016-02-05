@@ -72,7 +72,7 @@
 					if($result[fileName]!=NULL){
 					?>
 					<tr>
-						<td colspan="2"><img src="<?=$file_path?>" width="850" height="300" style="cursor:pointer" onclick="image();"></td>
+						<td colspan="2"><img src="<?=$file_path?>" style="cursor:pointer; height:500px; width:800px" onclick="image();"></td>
 					</tr>
 					<?}?>
 

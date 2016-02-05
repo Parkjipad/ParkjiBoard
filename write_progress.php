@@ -31,6 +31,6 @@
 			mkdir($dir,0777,true);
 		}
 		move_uploaded_file($_FILES["file_up"]["tmp_name"],$file_path);
-		echo "<script>window.open('main.php','_self');</script>"
+		//echo "<script>window.open('main.php','_self');</script>"
 	?>
 

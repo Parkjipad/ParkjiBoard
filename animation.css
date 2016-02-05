@@ -1,0 +1,23 @@
+div {
+    position: relative;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2.5s; /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: 1; /* Chrome, Safari, Opera */
+    -webkit-animation-direction: reverse; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 2.5s;
+    animation-iteration-count: 1;
+    animation-direction: reverse; 
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {opacity: 1; }
+    100% {opacity: 0; }
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {opacity: 1; }
+    100% {opacity: 0; }
+}
