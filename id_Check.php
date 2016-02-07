@@ -38,7 +38,7 @@
         <input type = "hidden" id = "temp_form" value = <?=$id_ok?>></input><!--php의 변수를 Javascript로 전달하기 위한 input-->
         <input type = "hidden" id = "temp_return" value = <?=$_POST["id_temp"]?>></input><!--id_Check.php에서 검사한 Id를 Sign.php로 전달하기 위한 input-->
     </form>
-    <script>
+    <script type="text/javascript">
         var temp_id = $("#temp_form").attr("value");
         
         if(temp_id==0){

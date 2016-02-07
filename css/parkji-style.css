@@ -30,7 +30,7 @@ body {
 	font-size: 21px;
 	padding: 14px 24px;
 }
-#firstPN{
+#firstPN, #middlePN, #lastPN{
   margin-top: 15px;
   width: 100px;
   height:40px;

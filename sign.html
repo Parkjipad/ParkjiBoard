@@ -10,19 +10,19 @@
 </head>
 <style>
 
-.btn{
-  margin-top: 15px;
-  width: 150px;
-  height: 40px;
-  font-size: 14px;
-  padding-top: 10px;
-} 
+  .btn{
+    margin-top: 15px;
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+    padding-top: 10px;
+  } 
 
 
 </style>
 
 <body>
-  
+
   <div class="container">
 
     <hr>
@@ -36,8 +36,8 @@
 
     <div class="row">
 
-      <form action="sign_up.php" method = "POST" name = "frm" class="form-horizontal">
-        
+      <form action="sign_up.php" method = "POST" name = "frm" class="form-horizontal span12">
+
         <div class="control-group">
           <label class="control-label" for="Name"><h3 class="span2">이름 : </h3></label>
           
@@ -72,12 +72,9 @@
         <div class="control-group">
           <label class="control-label" for="mailName"><h3 class="span2">e메일 : </h3></label>
           
-          <div class="control span3">
-            <input type = "text" id="email" name = "mailName"></input><h3>@</h3>
+          <div class="control span3" style=" font-size:20pt;">
+            <input type = "text" id="email" name = "mailName" style="width:180px"> &nbsp&nbsp&nbsp&nbsp@</input>
           </div>
-
-         
-
           <div class="control span3">
             <input type = "text" id="emailCompany" name = "mailCompany"></input>
           </div>
@@ -85,14 +82,14 @@
           <div class="btn-group span1">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-target="#" aria-expanded="false">
               Mail<span class="caret"></span></button>
-              <ul class="dropdown-menu control" role="menu" aria-labelledby="dropdownMenu" id="eee">
+              <ul class="dropdown-menu control" role="menu" aria-labelledby="dropdownMenu" id="mailUl">
                 <li><a tabindex="-1" href="#">daum.net</a></li>
-                <li onClick="insertMail(this);"><a tabindex="-1" href="#">gmail.com</a></li>
-                <li onClick="insertMail(this);"><a tabindex="-1" href="#">hanmail.net</a></li>
-                <li onClick="insertMail(this);"><a tabindex="-1" href="#">nate.com</a></li>
-                <li onClick="insertMail(this);"><a tabindex="-1" href="#">naver.com</a></li>
+                <li><a tabindex="-1" href="#">gmail.com</a></li>
+                <li><a tabindex="-1" href="#">hanmail.net</a></li>
+                <li><a tabindex="-1" href="#">nate.com</a></li>
+                <li><a tabindex="-1" href="#">naver.com</a></li>
                 <li class="divider"></li>
-                <li onClick="insertMail(this);"><a tabindex="-1" href="#">직접입력</a></li>
+                <li><a tabindex="-1" href="#">직접입력</a></li>
               </ul>
             </div>
 
@@ -101,36 +98,36 @@
           <div class="control-group">
             <label class="control-label" ><h3 class="span2">전화번호 : </h3></label>
             <div class="btn-group control span1">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-target="#" aria-expanded="false" style="width:80px;">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="telBtn" data-target="#" aria-expanded="false" style="width:80px;">
                 010<span class="caret"></span></button>
-                <ul class="dropdown-menu control span1" role="menu" aria-labelledby="dropdownMenu" id="rrr">
-                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">010</a></li>
-                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">011</a></li>
-                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">016</a></li>
-                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">017</a></li>
-                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">018</a></li>
-                  <li onClick="insertTel(this);"><a tabindex="-1" href="#">019</a></li>
+                <ul class="dropdown-menu control span1" role="menu" aria-labelledby="dropdownMenu" id="telUl">
+                  <li><a tabindex="-1" href="#">010</a></li>
+                  <li><a tabindex="-1" href="#">011</a></li>
+                  <li><a tabindex="-1" href="#">016</a></li>
+                  <li><a tabindex="-1" href="#">017</a></li>
+                  <li><a tabindex="-1" href="#">018</a></li>
+                  <li><a tabindex="-1" href="#">019</a></li>
                 </ul>
               </div>
 
-              <div class="control" style="margin-left:50px;">
-                <input type="hidden" id="firstPN" name="firstPN"></input>
+              <div class="control span1" style="margin-left:50px;">
+                <input type="text" id="firstPN" name="firstPN"></input>
               </div>
 
-              <div class="control" style="margin-left:50px;">
-                <h3 class="span1" style="text-align:center;">-</h3>
+              <div class="control span1" style="margin-left:50px;">
+                <h3 style="text-align:center;">-</h3>
               </div>
 
-              <div class="control span2">
-                <input type="text" id="firstPN" name="middlePN"></input>
+              <div class="control span1">
+                <input type="text" id="middlePN" name="middlePN"></input>
               </div>
 
-              <div class="control" style="margin-left:50px;">
-                <h3 class="span1">-</h3>
+              <div class="control span1" style="margin-left:50px;">
+                <h3 style="text-align:center;">-</h3>
               </div>
 
-              <div class="control span2">
-                <input type="text" id="firstPN" name="lastPN"></input>
+              <div class="control span1">
+                <input type="text" id="lastPN" name="lastPN"></input>
               </div>
             </div>
 
@@ -155,17 +152,30 @@
       <script src="http://code.jquery.com/jquery-latest.min.js"></script>
       <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
       <script>
-      var openwin;
+        var openwin;
 
-      function aa(){
-         $('html, body').scrollTop(300);
-      }
+        $(document).bind('ready',function(){
+          $('li').bind('click',function(){
+            var liParent=$(this).parent();
+            var thisText=$(this).text();
+            if(liParent.attr('id')=="mailUl"){
+            if(thisText=="직접입력")
+              $('#emailCompany').attr('value',"");
+           else
+             $('#emailCompany').attr('value',thisText);
+         }
+         else if(liParent.attr('id')=="telUl"){
+            $('#firstPN').attr('value',thisText);
+            $('#telBtn').text(thisText);
+             }
+         })
+        })
 
-      function insertMail(e){
+      /*function insertMail(e){
         $('#emailCompany').attr('value',$(e).text());
         if($(e).text()=="직접입력")
           $('#emailCompany').attr('value',"");
-      }
+      }*/
 
       function insertTel(r){
         $('#firstPN').attr('value',$(r).text());
@@ -173,12 +183,11 @@
       function idCheck(){
         openwin = window.open("id_Check.php","","width=400, height=300");
       } 
-
       function insertId(){
         var i = openwin.hidden.temp_return.value;
         $('.Id').attr('value',i);
       }
-      </script>
+    </script>
 
-    </body>
-    </html>
+  </body>
+  </html>

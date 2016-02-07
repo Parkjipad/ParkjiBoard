@@ -14,7 +14,7 @@
 		if($_POST['Name']!=NULL){
 				mysql_query("INSERT INTO member(Name, Id, Password, Mail, callNum) 
 							values('$_POST[Name]', '$_POST[Id]','$_POST[Pass]','$mail','$tel' )");
-				echo "<script>alert('가입이 완료되었습니다.');history.back();</script>";
+				echo "<script>alert('가입이 완료되었습니다.');window.open('main.php','_self');</script>";
 		}	
 	?>
 </body>

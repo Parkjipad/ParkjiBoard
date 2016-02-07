@@ -14,7 +14,7 @@
 				if($_POST["login_pw"] == $result[Password]){
 					$login_array= array("Id"=>"$result[Id]","Name"=>"$result[Name]","Manager"=>"$result[manager]");
 					$_SESSION["user"] = $login_array;
-					echo "<script>alert('$result[Name]님 환영합니다.');window.open('$_SESSION[url]','_self');</script>";		
+					echo "<script>alert('$result[Name]님 환영합니다.');window.open('$_SESSION[url]','_self');</script>";
 					$login_ok = 1;		
 					break;			
 				}

@@ -51,7 +51,7 @@
 			<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 			<script>
 			function pagemove(){
-				window.open("sign.php","_self");
+				window.open("sign.html","_self");
 			}
 			$(document).bind('ready',function(){
 				$('li').bind('mouseover',function(){

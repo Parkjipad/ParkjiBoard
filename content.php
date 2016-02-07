@@ -1,8 +1,9 @@
+<?session_start();?>
 <html>
 <head>
 
 	<meta charset="utf-8">
-	<title>gg</title>
+	<title>Content</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="css/parkji-style.css" rel="stylesheet">
 </head>
@@ -12,6 +13,12 @@
 	}
 	.table td{
 		padding-left:10px;
+	}
+	img{
+		cursor:pointer; 
+		height:500px; 
+		width:800px;
+		margin-left:60px;
 	}
 	
 </style>
@@ -28,6 +35,9 @@
 	}
 
 	$file_path = "upload/".$result[Id]."/".$result[fileName];
+	$count=$result[look]+1;
+	mysql_query("UPDATE board_01 SET look='$count' WHERE headNt='$result[headNt]'");
+
 	?>
 
 	<div class="container narrow">
@@ -72,11 +82,18 @@
 					if($result[fileName]!=NULL){
 					?>
 					<tr>
-						<td colspan="2"><img src="<?=$file_path?>" style="cursor:pointer; height:500px; width:800px" onclick="image();"></td>
+						<td colspan="2"><img src="<?=$file_path?>" style="" onclick="image();"></td>
 					</tr>
 					<?}?>
-
 				</table>
+				<?
+				if($_SESSION['user']['Manager']==1||$_SESSION['user']['Manager']==2){
+				?>
+				<form method="POST" action="contentDel.php">
+				<input type="hidden" name="delContent0" value="<?=$reulst[headNt]?>"/>
+				<input type="submit" class="btn btn-danger" value="삭제" style="float:right"/>
+				</form>
+				<?}?>
 				<div>
 					<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 					<script type="text/javascript">

@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Insert Page</title>
+	<title>Write</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="css/parkji-style.css" rel="stylesheet">
 </head>
