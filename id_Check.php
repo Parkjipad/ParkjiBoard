@@ -16,7 +16,7 @@
         $id_ok=2;//중복 검사 결과를 저장해주는 변수
         $count=0;//데이터베이스 안에 있는 개체의 수를 저장하는 변수
 
-        $row = mysql_query("SELECT * FROM member ORDER BY Name ASC");
+        $row = mysql_query("SELECT * FROM member");
         while($result = mysql_fetch_array($row)){
             $temp[$count] = $result[Id];//각 객체의 Id를 배열로 저장
             $count++;
@@ -27,11 +27,11 @@
                 $id_ok=1;
                 break;
             }
-            else if($_POST['id_temp']!=NULL)//같은 Id가 없을 때
+            else if($_POST['id_temp']!=NULL){   //같은 Id가 없을 때
                 $id_ok=0;
+            }
         }
-        print_r($temp);
-        echo $_POST["id_temp"];
+        echo $_POST["id_temp"]."<br>";
 
     ?>
     <form name = "hidden">

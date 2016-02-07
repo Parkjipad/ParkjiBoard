@@ -1,7 +1,7 @@
 <?session_start();?>
 <html>
 <head>
-    <title>hihi</title>
+    <title>ParkjiBoard</title>
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/parkji-style.css" rel="stylesheet">
