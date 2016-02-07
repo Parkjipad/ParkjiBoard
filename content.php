@@ -34,7 +34,7 @@
 			break;
 	}
 
-	$file_path = "upload/".$result[Id]."/".$result[fileName];
+	$file_path = "upload/".$result[Id].$result[fileName];
 	$count=$result[look]+1;
 	mysql_query("UPDATE board_01 SET look='$count' WHERE headNt='$result[headNt]'");
 

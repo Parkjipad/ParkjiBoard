@@ -14,8 +14,7 @@
 
 		$date_now=date(y."-".m."-".d);
 		$look = 0;
-		$file_path = "upload/".$_SESSION["user"]["Id"]."/".$_FILES["file_up"]["name"];
-		$dir = "upload/".$_SESSION["user"]["Id"];
+		$file_path = "upload/".$_SESSION["user"]["Id"].$_FILES["file_up"]["name"];
 		$Name = $_SESSION["user"]["Name"];
 		$Id = $_SESSION["user"]["Id"];
 		$filename=$_FILES["file_up"]["name"];
@@ -23,14 +22,15 @@
 		if($_POST['title']!=NULL){
 			mysql_query("INSERT INTO board_01(dt, Id, title, name, look, contents, headNt, fileName) 
 						values( '$date_now', '$Id','$_POST[title]', '$Name', '$look', '$_POST[contents]', '$temp', '$filename')");
-		}	
+		}
+		echo $temp;	
 		
-		if(is_dir($dir)){
+		if(move_uploaded_file($_FILES["file_up"]["tmp_name"],$file_path)){ 
+			echo "<script>window.open('main.php','_self');</script>"; //if로 감싸지 않으면 $temp가 정상적인 값을 가지지 않는 오류가 있음.. 임시방편..
 		}
-		else{
-			mkdir($dir,0777,true);
+		else
+		{
+			echo "<script>window.open('main.php','_self');</script>";	
 		}
-		move_uploaded_file($_FILES["file_up"]["tmp_name"],$file_path);
-		//echo "<script>window.open('main.php','_self');</script>"
 	?>
 
