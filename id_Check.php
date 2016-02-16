@@ -51,7 +51,7 @@
         }
 
         if(temp_id!=0){
-            $("#button").attr("type","hidden");                
+            $("#button").attr("type","hidden");
         }
 
         function clickbt(){
