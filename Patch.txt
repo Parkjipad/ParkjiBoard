@@ -16,3 +16,6 @@
 - JSON을 이용한 php,javascript사이의 배열 전달
 - 삭제기능추가(contentDel.php)
 - main.php 주석추가
+
+02/16
+- content에서 삭제버튼을 눌러도 삭제가 되지않는 현상 수정
