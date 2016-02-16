@@ -37,10 +37,10 @@
     mysql_select_db("board",$connect);
 
     if($_GET['page']==NULL) $_GET['page']=0;
-    $querypage=mysql_query("SELECT headNt FROM board_01 ORDER BY headNt DESC");     //마지막 게시글 넘버를 확인하기 위한 쿼리
+    $querypage=mysql_query("SELECT headNt FROM board_01 ORDER BY headNt DESC");     
     $tmpWriting=mysql_fetch_array($querypage);                                      
     $totalWriting=$tmpWriting[0];                                                   
-    $maxRange=$totalWriting-($_GET['page']*10);                                     //한 페이지에 10개의 게시물이 등록이 되게끔 DB의 범위를 지정
+    $maxRange=$totalWriting-($_GET['page']*10);                                  
     $minRange=$totalWriting-(($_GET['page']+1)*10);
     if($minRange<0)
         $minRange=-1;
@@ -81,8 +81,8 @@
                                 <th align="center" class="span1">조회수</th>
                             </tr>
                             <?
-                            $head=array();      //게시글 번호를 저장할 배열.
-                            while($result = mysql_fetch_array($row)){ //테이블 내용을 채워줌.
+                            $head=array();      
+                            while($result = mysql_fetch_array($row)){ 
                                 $dt=$result[dt];
                                 $head[]=$result[headNt];
                                 ?>
@@ -95,7 +95,7 @@
                                 <?  }  ?>
                             </table>
                         </div>
-                        <div class="control-group">            <!--페이지 탐색막대 게시물 10개마다 1개씩 추가된다.-->
+                        <div class="control-group">        
                             <div class="pagination control">
                                 <ul id="mainpage" style="margin-left:490">
                                     <?
@@ -116,24 +116,24 @@
                 <form method="POST" name="delFrm" id="delFrm" action="contentDel.php">
                 </form>
                 <?
-                    $json=json_encode($head);//게시글 번호 배열을 스크립트에 넘기기 위해 json을 사용
+                    $json=json_encode($head);
                 ?>
 
 
                 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
                 <script type="text/javascript">
-                    var rowCount = $('#mainTable tr').length;     //테이블의 행 갯수 얻는 변수
-                    var editCount=0; //체크박스 생성 유무를 확인하는 변수
+                    var rowCount = $('#mainTable tr').length;     
+                    var editCount=0; 
 
-                    var subwidth=<?=$pageCount-1?>*15;                      //페이지 탐색 넘버가 추가 될 때 
-                    var ulwidth=$('#mainpage').css('margin-left');          //margin을 맞춰 제목과 탐색막대가 일치하게 함.
+                    var subwidth=<?=$pageCount-1?>*15;                    
+                    var ulwidth=$('#mainpage').css('margin-left');          
                     ulwidth=ulwidth.split('px')[0]-subwidth;
                     $('#mainpage').css('margin-left',ulwidth);
 
-                    var delArray=new Array();                               //바로 밑에 있는 JSON배열을 받아서 
-                    var headNt=<?=$json;?>;                                 //Checkbox에 value값을 뿌려줌.
+                    var delArray=new Array();                             
+                    var headNt=<?=$json;?>;                                
                     
-                    var realTable=document.getElementById('mainTable').offsetHeight;//실제 테이블 크기와 div의 크기를 맞춤
+                    var realTable=document.getElementById('mainTable').offsetHeight;
                     $('#divTable').css('height',realTable);
 
                     function writepage(){
