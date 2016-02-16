@@ -7,7 +7,7 @@
 	$del=array();
 	while($_POST['delContent'.$i]){
 		$del[]=$_POST['delContent'.$i];
-		echo $_POST['delContent0']."<br>";
+		echo $_POST['delContent'.$i]."<br>";
 		$i++;
 	}
 
@@ -30,7 +30,7 @@
 		$minRange++;
 		$maxRange++;
 	}
-	//echo "<script>alert('삭제가 완료되었습니다.');history.back();</script>";
+	echo "<script>alert('삭제가 완료되었습니다.');window.open('main.php','_self');</script>";
 	?>
 
 </body>

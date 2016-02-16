@@ -16,7 +16,6 @@
 	}
 	img{
 		cursor:pointer; 
-		height:500px; 
 		width:800px;
 		margin-left:60px;
 	}
@@ -82,7 +81,7 @@
 					if($result[fileName]!=NULL){
 					?>
 					<tr>
-						<td colspan="2"><img src="<?=$file_path?>" style="" onclick="image();"></td>
+						<td colspan="2"><img src="<?=$file_path?>" onclick="image();"></td>
 					</tr>
 					<?}?>
 				</table>
@@ -90,7 +89,7 @@
 				if($_SESSION['user']['Manager']==1||$_SESSION['user']['Manager']==2){
 				?>
 				<form method="POST" action="contentDel.php">
-				<input type="hidden" name="delContent0" value="<?=$reulst[headNt]?>"/>
+				<input type="hidden" name="delContent0" value="<?=$result[headNt]?>"/>
 				<input type="submit" class="btn btn-danger" value="삭제" style="float:right"/>
 				</form>
 				<?}?>
@@ -102,12 +101,13 @@
 					function image(){
 						window.open("<?=$file_path?>");
 					}
-						$(document).bind('ready',function(){
-							$('li').bind('mouseover',function(){
-								$('li').removeClass('active');
-								$(this).addClass('active');
-							})
+
+					$(document).bind('ready',function(){
+						$('li').bind('mouseover',function(){
+							$('li').removeClass('active');
+							$(this).addClass('active');
 						})
+					})
 					</script>
 				</body>
 				</html>
