@@ -7,9 +7,10 @@
 	$del=array();
 	while($_POST['delContent'.$i]){
 		$del[]=$_POST['delContent'.$i];
+		echo $_POST['delContent0']."<br>";
 		$i++;
 	}
-	$_SESSION['url']=$_SERVER["REQUEST_URI"];
+
 	print_r($del);
 
 	$connect = mysql_connect(localhost,'root','1234')or ide("MySQL Server 연결에 실패했습니다.");
@@ -29,7 +30,7 @@
 		$minRange++;
 		$maxRange++;
 	}
-	echo "<script>alert('삭제가 완료되었습니다.');history.back();</script>";
+	//echo "<script>alert('삭제가 완료되었습니다.');history.back();</script>";
 	?>
 
 </body>

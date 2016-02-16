@@ -97,6 +97,8 @@
 				<div>
 					<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 					<script type="text/javascript">
+					var temp=<?=$result[headNt];?>;
+					document.getElementsByName('delContent0').value=temp;
 					function image(){
 						window.open("<?=$file_path?>");
 					}
