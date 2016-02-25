@@ -45,17 +45,18 @@
 					?>
 				</div>
 				<hr>
-				<form name = "write_content" method="POST" enctype="multipart/form-data" action="write_progress.php" class="form-horizontal" onsubmit="captureReturnKey(event)">
+				<form name = "write_content" method="POST" enctype="multipart/form-data" action="write_progress.php" class="form-horizontal" >
 					<div class="control-group">
 						<label class="control-label" for="title"><h3>제목 : </h3></label>
 						<div class="control">
-							<input type="text" name="title" size="30" id="signText"></input>
+							<input type="text" name="title" size="30" id="signText" onkeydown="javascript: if (event.keyCode == 13) {return false;}"></input>
+							<input type="text" style="display:none;"/>
 						</div>
 					</div>
 					<div class="control-group" style="height:220px">
 						<label class="control-label" for="contents" style:"text-align: center;"><h3>내용 : </h3></label>
 						<div class="control" style="margin-top:20px">
-							<input type="text" name="contents" id="contentText" height="100px" onkeydown="javascript:if(event.keyCode==13){goPage('1'); return false;}"></input>
+							<textarea name="contents" id="contentText"></textarea>
 						</div>
 					</div>
 					<div class="control-group" >

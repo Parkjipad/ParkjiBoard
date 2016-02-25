@@ -4,7 +4,7 @@
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 	<form method ="POST" action = "id_Check.php" name = "check_frm" id ="frm">
-		아이디 : <input type = "text" name = "id_temp" id="id_check"/>
+		아이디 : <input type = "text" name = "id_temp" id="id_check" style="ime-mode:disabled" />
         <input type="submit" value ="검사하기"/>
 		<input type = "button" id = "button" value = "적용하기" onClick = "clickbt();"/>
 	</form>
@@ -38,7 +38,7 @@
         <input type = "hidden" id = "temp_form" value = <?=$id_ok?>></input>
         <input type = "hidden" id = "temp_return" value = <?=$_POST["id_temp"]?>></input>
     </form>
-    <script type="text/javascript">
+    <script type="text/javascript"> 
         var temp_id = $("#temp_form").attr("value");
         
         if(temp_id==0){
@@ -56,6 +56,7 @@
 
         function clickbt(){
             opener.parent.insertId();
+            opener.parent.checkId();
             window.close();
         }
     </script>

@@ -7,10 +7,8 @@
 		$mail = $_POST["mailName"]."@".$_POST["mailCompany"];
 		$tel;
 		settype($tel,"string");
-		$tel = $_POST["firstPhoneNum"].$_POST["middlePhoneNum"].$_POST["lastPhoneNum"];
-		
+		$tel = $_POST["firstPN"].$_POST["middlePN"].$_POST["lastPN"];
 
-		echo $_POST['Name'];
 		if($_POST['Name']!=NULL){
 				mysql_query("INSERT INTO member(Name, Id, Password, Mail, callNum) 
 							values('$_POST[Name]', '$_POST[Id]','$_POST[Pass]','$mail','$tel' )");
