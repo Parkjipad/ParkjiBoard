@@ -80,11 +80,9 @@
 
 					</tr>
 					<?
-					if($result[fileName]!=NULL){
-						$img = iconv("EUC-KR","UTF-8", $file_path);
-						?>
+					if($result[fileName]!=NULL){?>
 						<tr>
-							<td colspan="2"><img src="<?=$img?>" onclick="image();" align="middle"></td>
+							<td colspan="2"><img src="<?=$file_path?>" onclick="image();" align="middle"></td>
 						</tr>
 						<?}?>
 					</table>
@@ -107,7 +105,7 @@
 							var temp=<?=$result[headNt];?>;
 							document.getElementsByName('delContent0').value=temp;
 							function image(){
-								window.open("<?=$img?>");
+								window.open("<?=$file_path");
 							}
 
 							$(document).bind('ready',function(){

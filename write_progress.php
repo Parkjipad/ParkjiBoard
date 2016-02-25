@@ -1,7 +1,7 @@
 <?session_start();?>
 		<?
 		$connect = mysql_connect(localhost,'root','1234')or die("MySQL Server 연결에 실패했습니다.");
-		mysql_select_db("board",$connect);
+		mysql_select_db("board",$connect); 
 
 		$row = mysql_query("SELECT * FROM board_01 ORDER BY headNt DESC");
 		$result = mysql_fetch_array($row);
@@ -9,7 +9,7 @@
 
 		$date_now=date(y."-".m."-".d);
 		$look = 0;
-		$filename=iconv("UTF-8","EUC-KR",$_FILES["file_up"]["name"]);
+		$filename=$_FILES["file_up"]["name"];
 		$file_path = "upload/".$_SESSION["user"]["Id"].$filename;
 		$Name = $_SESSION["user"]["Name"];
 		$Id = $_SESSION["user"]["Id"];
