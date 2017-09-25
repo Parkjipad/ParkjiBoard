@@ -1,0 +1,295 @@
+<h1 id="신고-갤러리-개선">신고 갤러리 개선</h1>
+
+
+
+<h6 id="개발2팀-박지훈">개발2팀 박지훈</h6>
+
+
+
+<h2 id="구갤러리"><strong><a href="http://gall.dcinside.com/list_pjh.php?id=singo" title="구갤">(구)갤러리</a></strong></h2>
+
+<hr>
+
+<ul>
+<li>구갤러리 신고 게시판 수정.</li>
+<li>대분류, 소분류 추가.</li>
+<li>다중 관리 추가.</li>
+<li>‘본문만보기’ 레이어 추가.</li>
+<li>댓글 매크로 변경.</li>
+<li>차단 레이어 변경.</li>
+<li>숨김, 차단 버튼 변경.</li>
+<li>170830 주석</li>
+</ul>
+
+
+
+<h2 id="추가-변경-부분">추가, 변경 부분</h2>
+
+
+
+<h3 id="1-대분류-소분류-추가">1. 대분류, 소분류 추가</h3>
+
+<ul>
+<li><p>gallery_board_singo 에 f_category(대분류),  s_category(소분류) 컬럼 추가. </p></li>
+<li><p>skin/gallery/dc_singo/_top.php</p>
+
+<ul><li>singo Table-&gt; conf_category 테이블에서 카테고리에 대한 정보를 SELECT.</li>
+<li>대분류는 A태그로 URL을 링크걸어 출력.</li>
+<li>소분류는 현재 대분류에 속해 있는 것들을 SELECT한 후 SELECT-&gt;OPTION태그로 출력.</li></ul></li>
+<li>gallery/list.php <br>
+<ul><li>$_GET 방식으로 f_c(f_category)와  s_c(s_category)를 받음.</li>
+<li>f_c 가 없다면 기본적으로 f_c=1로 선언.</li>
+<li>WHERE 조건문 변수인 <span>$</span>s_query에 f_category = <span>$</span>f_c, s_category = $s_c 를 추가.</li>
+<li>singo게시판에서만 적용.($id==’singo’)</li></ul></li>
+</ul>
+
+
+
+<h3 id="2-다중관리-추가">2.   다중관리 추가</h3>
+
+<ul>
+<li><p>multi_report 테이블 추가</p>
+
+<pre><code>* no - 고유번호
+* user_id - 로그인한 유저 아이디
+* login_time - 로그인 시간
+* logout_time - 로그아웃 시간
+* is_login - 로그인 여부
+* report_order - 관리 순서
+</code></pre></li>
+<li>gallery/list.php <br>
+<ul><li>multi_report테이블에서 is_login=1인 유저를 체크하여 현재 다중관리 인원을 구함.</li>
+<li>count(no)를 SELECT하여 로그인한 인원수를 구함.($multi_report_cnt)</li>
+<li>로그인한 아이디의 report_order값을 SELECT.($multi_report_user)</li>
+<li>조건문 변수 <span>$</span>s_query에 “no%로그인한 인원수 = 관리 순서”를 추가함.( <script type="math/tex" id="MathJax-Element-1">s_query .= "no%".</script>multi_report_cnt[0].” = “.$multi_report_user[‘report_order’];)</li></ul></li>
+<li><p>gallery/multi_report.php</p>
+
+<ul><li>파라미터( id, mode ) 체크</li>
+<li><p>로그인 유효성 체크</p>
+
+<pre><code>* 기존에 로그인 되어 있는지 체크.
+* 기존 로그인 인원이 4명 초과인지 체크(다중관리는 4명까지 지원).
+* 로그인한 유저가 관리자인지 체크.
+</code></pre></li>
+<li><p>로그인 정보 Insert</p>
+
+<pre><code>* is_loing = 1인 유저 SELECT.
+* while문으로 1~ 로그인 유저 수 까지 반복하여 비어 있는 관리 순서 체크.
+* 유저 아이디, 로그인 시간,  로그인 여부(1), 관리 순서 Insert.
+</code></pre></li>
+<li>로그아웃 유효성 체크 - 유저아이디의 is_login 검사.</li>
+<li>로그 아웃 업데이트 - 로그아웃 시간, 로그인 여부(0), 관리 순서(0)</li>
+<li>기존 페이지로 이동.</li></ul></li>
+</ul>
+
+
+
+<h3 id="3-본문만-보기-레이어-추가">3.  ‘본문만 보기’ 레이어 추가.</h3>
+
+<ul>
+<li><p>skin/gallery/dc_singo/_view.php</p>
+
+<ul><li>gallery_board_singo 테이블에  gall_id, gall_no 추가.(신고한 게시물의 id, no)</li>
+<li>본문 내용 뒤에 ‘본문만 보기’ 버튼 추가</li>
+<li>javascript -&gt; function layer_open(el) 추가</li>
+<li><p>function laery_open(el)</p>
+
+<pre><code>* gall_id와 gall_no를 사용하여 iframe의 url을 생성하여 js변수로 선언.
+* 본문만 보기 레이어 display-&gt;block 변경.
+* 레이어 내부에 iframe(id == singo_layer)이 없다면 iframe추가.
+</code></pre></li>
+<li><p>페이지 최하단에 팝업레이어 추가.</p></li></ul></li>
+<li><p>gallery/view_layer.php</p>
+
+<ul><li>본문만 보기 iframe에서 호출하는 페이지.</li>
+<li>기존의 서브 기능들을 사용하려면 include해야하는 페이지가 많아 낭비가 심하여 본문보기, 차단, 숨김 기능만 제공</li>
+<li><p>DB connect</p>
+
+<pre><code>* $com_connect -&gt; 갤러리 정보(gallery_admin_table)
+* $sep_connect -&gt; 본문 내용 정보(gallery_board_id, gallery_info_id)
+</code></pre></li>
+<li><p>파라미터</p>
+
+<pre><code>* $view_data -&gt; 본문 제목, 내용등 대다수의 데이터.
+* $recomm_data -&gt; 본문 추천, 비추천
+* $bt_admin -&gt; 관리자용 숨김, 차단 버튼 html
+</code></pre></li>
+<li><p>차단을 위해 추가된 기존의 함수.</p>
+
+<pre><code>* XMLHTTP() - XML통신 함수
+* setAvoid_new() - 차단 함수( _script_list.php-&gt;setAvoid() 함수 부분 변경 )
+* categoryChange() - 숨김 처리 함수
+* e.keycode==67(영어 c )에 keydown이벤트를 걸어 숨김처리 함.
+</code></pre></li></ul></li>
+</ul>
+
+
+
+<h3 id="4-댓글-매크로-변경">4. 댓글 매크로 변경.</h3>
+
+<ul>
+<li><p>conf_macro 테이블 추가</p>
+
+<pre><code>* cm_idx - 매크로 고유번호
+* cm_hotkey - 단축키
+* cm_title - 제목(신고 본문에서 표시될 내용)
+* cm_content - 댓글 내용(실제 댓글 남길 내용)
+* cm_alert_msg - 중복 신고시 보여주는 문구
+* cm_block - 댓글 작성 후 차단 유무
+</code></pre></li>
+<li>skin/gallery/dc_singo/reple2.php <br>
+<ul><li>conf_macro 테이블에서 전체 macro 리스트를 가져와서 출력.</li></ul></li>
+<li>skin/gallery/dc_singo/key_answer.php <br>
+<ul><li>cm_macro테이블에서 cm_hotkey 추출.</li>
+<li>각각의 hotkey에 “|”를 더하여 $hotkey_array에 저장.</li>
+<li>$hotkey_array를 js변수 key_tmp 에 선언한 후 |로 분할.</li>
+<li>서브밋 함수에서 hidden:name=key의 value를 var key로 지정.</li>
+<li>comment_ok.php 로 서브밋</li></ul></li>
+<li>gallery/comment_ok.php <br>
+<ul><li>conf_macro테이블에서 cm_hotkey = $key 인 항목을 SELECT.</li>
+<li>$memo를 SELECT한 항목의 cm_content로 지정.</li>
+<li>cm_block이 1이면 dc_avoid_ip(common DB)에 Insert.</li>
+<li>cm_alert_msg가 있으면 <span>$</span>_InsertData에 추가.(<span>$</span>_InsertData[alert_msg] = $hotkey_info[‘cm_alert_msg’];)</li></ul></li>
+</ul>
+
+
+
+<h3 id="5-차단-레이어-변경">5. 차단 레이어 변경</h3>
+
+<ul>
+<li>skin/gallery/dc_singo/_list_new.php,    skin/gallery/skin_new/_list_new.php <br>
+<ul><li>하단 차단 팝업의 HTML변경. <br>
+<ul><li>차단 시간, 차단 사유 select-option태그 -&gt; radio 태그로 변경.</li>
+<li>도배시간 주단위, 월단위 추가.</li></ul></li></ul></li>
+<li>gallery/inc/_script_list.php <br>
+<ul><li>기존 차단함수 setAvoid()를 변경하여 setAvoid_new() 추가.</li>
+<li>신고 사유, 차단 시간이 radio태그로 바뀌어서 해당값 가져오는 변수 변경.</li></ul></li>
+<li>gallery/avoid.php <br>
+<ul><li>날짜 계산 추가</li></ul></li>
+</ul>
+
+
+
+<h3 id="6-숨김-차단-버튼-변경">6. 숨김, 차단 버튼 변경</h3>
+
+<ul>
+<li>gallery/inc/_list_check.php <br>
+<ul><li>$bt_admin에 버튼 태그 지정.</li>
+<li>기존 C, I -&gt; C(숨김), I(차단)으로 변경.</li>
+<li>신고게시판은 C, I를 키우지 않고 K만 키움.</li></ul></li>
+</ul>
+
+
+
+<h3 id="7-기타">7. 기타</h3>
+
+<ul>
+<li>gallery/inc/_list_check.php <br>
+<ul><li>다중관리 로그인 상태면 대분류에 따라 게시물 제목 색상 변경.</li></ul></li>
+</ul>
+
+<hr>
+
+
+
+<h2 id="모바일웹"><strong><a href="http://m.dcinside.com/singo/singo_new_category.php" title="모웹 신고">모바일웹</a></strong></h2>
+
+<hr>
+
+<ul>
+<li>신고 버튼 변경</li>
+<li>신고 카테고리 선택</li>
+<li>신고 게시물, 내용, 이미지 작성, 업로드</li>
+<li>중복 신고 체크</li>
+</ul>
+
+
+
+<h2 id="추가-변경-부분-1">추가, 변경 부분</h2>
+
+
+
+<h3 id="1-신고-버튼-변경">1. 신고 버튼 변경</h3>
+
+<ul>
+<li>common_new.js <br>
+<ul><li>기존 신고 버튼 클릭 이벤트 제거.</li>
+<li>신고 버튼 누를 시 중복 신고 체크 singo_new_Overlap() 실행.</li></ul></li>
+</ul>
+
+
+
+<h3 id="2-신고-카테고리-선택">2. 신고 카테고리 선택</h3>
+
+<ul>
+<li><p>singo/singo_new_category.php</p>
+
+<ul><li><p>파라미터</p>
+
+<pre><code>* gall_id - 신고게시물 아이디
+* gall_no - 신고게시물 번호
+</code></pre></li>
+<li>대분류와 소분류는 추가/삭제 될 수 있음.</li>
+<li>각 소분류(a 태그) 에 이벤트를 추가하여 소분류 클릭 시 해당 태그의 id를 categorySelected로 설정.</li>
+<li>카테고리 선택 후 ‘다음’ 버튼을 누르면 현재 있는 $_GET파라미터와 선택한 카테고리에 해당하는 대분류, 소분류를 \$_GET파라미터로 다음 페이지에 전달.</li></ul></li>
+</ul>
+
+<h3 id="3-신고-게시물-내용-작성">3. 신고 게시물 내용 작성</h3>
+
+<ul>
+<li><p>singo/singo_new_report.php</p>
+
+<ul><li><p>파라미터</p>
+
+<pre><code>* gall_id - 신고게시물 아이디
+* gall_no - 신고게시물 번호
+* f_c - 대분류
+* s_c - 소분류
+</code></pre></li>
+<li>신고 내용 <br>
+<ul><li>신고 아이디, 비밀번호 - 비회원일때 작성</li>
+<li>신고 갤러리 - 소분류에 따라 필수 작성해야 하거나 작성하지 않아도 신고 가능.</li>
+<li>신고 게시물 URL  <br>
+<ul><li>소분류에 따라 필수 작성해야 하거나 작성하지 않아도 신고 가능. </li>
+<li>gall_id, gall_no값이 있으면 자동으로 작성하고 없으면 input태그를 보여줌.</li>
+<li>하나의 URL만 작성 가능하게 정규식으로 검사.</li></ul></li>
+<li>신고 사유 - URL작성 금지</li>
+<li>첨부 이미지 - 기존 모바일 웹의 write.php 이미지 업로드 형식과 동일</li>
+<li>캡챠 인증 <br>
+<ul><li>비회원일때 작성</li>
+<li>singo DB - conf_singo테이블의 정보에 따라 사용 유무, 캡챠숫자를 정함.</li></ul></li></ul></li>
+<li>신고 완료 <br>
+<ul><li>이미지 개수 체크</li>
+<li>아이디, 비밀번호 체크.</li>
+<li>신고 게시물 URL 체크 <br>
+<ul><li>게시물 URL 필수 카테고리일 때 체크.</li>
+<li>게시물 URL이 비어있거나 http가 있는지 체크</li>
+<li>게시물 URL에 https 또는 http가 2개이상 있는지 체크</li>
+<li>갤러리 id와 갤러리 no가 제대로 입력됐는지 체크</li>
+<li>이상 없다면 hidden태그 gall_id와 gall_no에 id와 no입력</li></ul></li>
+<li>singo_new_Overlap()을 실행하여 중복 신고 체크</li></ul></li></ul></li>
+<li>code.php <br>
+<ul><li>id==singo 일 때 conf_singo테이블-&gt;cs_captchar를 password_count로 사용.</li></ul></li>
+</ul>
+
+
+
+<h3 id="4-중복-신고-검사">4. 중복 신고 검사</h3>
+
+<ul>
+<li><p>singo/singo_new_chkOverlap.php</p>
+
+<ul><li><p>파라미터</p>
+
+<pre><code>* gall_id - 신고게시물 id
+* gall_no - 신고게시물 no
+* singo_reason - 신고 사유
+* must_gall_chk - id, no 체크 여부
+</code></pre></li></ul></li>
+<li>파라미터 체크 -  <br>
+<ul><li>신고 접수 체크 <br>
+<ul><li>must_gall_chk이 Y일때 gall_id와 gall_no가 없으면 exit</li>
+<li>신고 사유가 없으면 exit</li></ul></li>
+<li>공통 체크</li>
+*</ul></li>
+</ul>
